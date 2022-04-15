@@ -19,13 +19,27 @@ const c = [
   10,
 ];
 
+function isGoodNumber(n) {
+  return typeof n === "number" && isFinite(n);
+}
+
 function sum(list) {
   let total = 0;
 
   for (const n of list) {
-    if (typeof n !== "number" || !isFinite(n)) {
+    if (Array.isArray(n)) {
+      for (const m of n) {
+        if (!isGoodNumber(m)) {
+          continue;
+        }
+        total += m;
+      }
+    }
+
+    if (!isGoodNumber(n)) {
       continue;
     }
+
     total += n;
   }
 
